@@ -1,0 +1,19 @@
+{
+  "name": "api.prestonneal.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nealwp/api.prestonneal.com.git"
+  },
+  "author": "nealwp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nealwp/api.prestonneal.com/issues"
+  },
+  "homepage": "https://github.com/nealwp/api.prestonneal.com#readme"
+}
