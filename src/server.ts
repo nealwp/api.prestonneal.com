@@ -1,17 +1,15 @@
 import express from 'express'
 
-const PORT: number = 8081
+export const createServer = async () => {
+    const server = express()
 
-const server = express()
+    server.get('/', (req, res, next) => {
+        res.json({message: 'hello friends'})
+    })
 
-server.get('/', (req, res, next) => {
-    res.json({message: 'hello friends'})
-})
+    server.get('/health', (req, res, next) => {
+        res.status(200).send()
+    })
 
-server.get('/health', (req, res, next) => {
-    res.status(200).send()
-})
-
-server.listen(PORT, () => {
-    console.log(`server listening on port ${PORT}`)
-})
+    return server;
+}
