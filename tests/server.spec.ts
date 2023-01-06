@@ -1,6 +1,7 @@
 import request from 'supertest'
 import { Express } from 'express-serve-static-core'
 import { createServer } from '../src/server'
+import { nullMiddleware } from '../src/middleware';
 import supertest from 'supertest';
 
 
@@ -12,8 +13,8 @@ describe('default test', () => {
 
 let server: Express;
 
-beforeAll(async () => {
-    server = await createServer()
+beforeAll(() => {
+    server = createServer(nullMiddleware)
 })
 
 describe('GET /', () => {
