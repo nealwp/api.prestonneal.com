@@ -1,7 +1,9 @@
 import { corsMiddleware } from './cors.middleware'
+import { loggerMiddleware } from './logger.middleware'
 
 const middleware = [
-    corsMiddleware
+    corsMiddleware,
+    loggerMiddleware
 ]
 
 const nullMiddleware: any[] = [
