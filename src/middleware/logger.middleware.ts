@@ -4,5 +4,7 @@ const logger = (req: any, res: any, next: any) => {
     console.log(`[${timestamp}]: ${method} ${url}`)
     next()
 }
+
 const loggerMiddleware = logger
+
 export { loggerMiddleware }
