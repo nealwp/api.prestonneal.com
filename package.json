@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon src/main.ts",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "docker:build": "docker build --tag nealwp/api.prestonneal.com:latest ."
   },
   "repository": {
