@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "dev": "nodemon src/main.ts",
     "build": "tsc --project tsconfig.build.json",
     "docker:build": "docker build --tag nealwp/api.prestonneal.com:latest ."

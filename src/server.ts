@@ -1,4 +1,5 @@
 import express from 'express'
+import { router } from './routers'
 
 export const createServer = (middleware: any[]) => {
     const server = express()
@@ -12,6 +13,8 @@ export const createServer = (middleware: any[]) => {
     server.get('/health', (req, res, next) => {
         res.status(200).send()
     })
+
+    server.use(router)
 
     return server;
 }
