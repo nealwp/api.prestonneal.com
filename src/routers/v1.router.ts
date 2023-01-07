@@ -13,7 +13,10 @@ router.get('/health', (req, res, next) => {
 
 router.get('/analytics/site-visits', async (req, res, next) => {
     const visits = await site.getVisitCount()
-    res.status(200).send()
+    const data = {
+        siteVisits: visits
+    }
+    res.status(200).json(data)
 })
 
 export default router
