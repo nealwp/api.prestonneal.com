@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { analytics} from "../../controllers/analytics.controller";
+import { version } from '../../../../package.json'
 
 const router = Router()
 
 router.get('/', (req, res, next) => {
-    res.json({ version: 1 })
+    res.json({ apiVersion: version })
 })
 
 router.get('/health', (req, res, next) => {
