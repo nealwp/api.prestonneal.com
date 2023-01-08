@@ -1,5 +1,5 @@
-import { analytics } from "../../src/controllers/analytics.controller"
-import * as db from "../../src/db"
+import { analytics } from "../../../src/v1/controllers/analytics.controller"
+import * as db from "../../../src/v1/db"
 
 describe('analytics controller', () => {
     beforeEach(async () => {

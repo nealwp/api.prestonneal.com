@@ -1,4 +1,4 @@
-import { middleware } from "./middleware"
+import { middleware } from "./v1/middleware"
 import { createServer } from "./server"
 
 const PORT: number = 8081
