@@ -1,5 +1,5 @@
 import express from 'express'
-import { router } from './v1/routers'
+import { router } from './v1/routes'
 
 export const createServer = (middleware: any[]) => {
     const server = express()

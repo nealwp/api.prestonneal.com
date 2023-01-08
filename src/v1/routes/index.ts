@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import v1Router from './public/router'
+import publicApi from './public/routes'
 
 const router = Router()
 
-router.use('/v1', v1Router)
+router.use('/v1', publicApi)
 
 export { router }
