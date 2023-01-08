@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { getHours, getHoursByProjectId, saveTimeEntry } from '../../controllers/hours.controller'
-const router = Router()
+import { getHours, getHoursByProjectId, saveTimeEntry } from '../../controllers/time.controller'
+const time = Router()
 
-router.route('/').get(async (req, res, next) => {
+time.get('/', async (req, res, next) => {
     const projectId = req.query?.projectId as unknown
     if (!projectId){
         const hours = await getHours()
@@ -12,7 +12,7 @@ router.route('/').get(async (req, res, next) => {
     res.json(projectHours)
 })
 
-router.route('/:projectId').post(async (req, res, next) => {
+time.post('/:projectId', async (req, res, next) => {
     const { projectId } = req.params
     const { startDatetime, endDatetime, description } = req.body
     
@@ -27,4 +27,4 @@ router.route('/:projectId').post(async (req, res, next) => {
     res.status(200).send()
 })
 
-export default router
+export default time
