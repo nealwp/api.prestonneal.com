@@ -3,6 +3,12 @@ import { createServer } from '../../../server'
 import { nullMiddleware } from '../../middleware';
 import supertest from 'supertest';
 
+jest.mock('../../../../package.json', () => {
+    return {
+        version: 1
+    }
+})
+
 let server: Express;
 
 beforeAll(() => {
@@ -16,7 +22,7 @@ describe('api v1', () => {
                 .get(`/v1/`)
                 .expect(200)
                 .then((res) => {
-                    expect(res.body).toMatchObject({ 'version': 1 })
+                    expect(res.body).toMatchObject({ 'apiVersion': 1 })
                 })
         })
     })
