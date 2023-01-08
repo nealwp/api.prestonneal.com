@@ -1,146 +1,55 @@
 import { Router } from 'express'
-import mysql from '../../config/db.config'
+import { getClients, getClientById, createClient, deleteClient, updateClient } from '../../controllers/clients.controller'
+
 const router = Router()
 
-router.route('/').get((req, res, next) => {
-    mysql.getConnection((error, db) => {
-        const sql = `
-            select 
-                BIN_TO_UUID(id) as id,
-                business_name,
-                contact_first_name,
-                contact_last_name,
-                email 
-            from 
-                clients`
-        db.query(sql, (error, results, fields) => {
-            if (error) {
-                return next(error)
-            }
-            res.json(results)
-        });
-        db.release();
-    })
+router.route('/').get(async (req, res, next) => {
+    const clients = await getClients()
+    res.json(clients)
 })
 
-router.route('/:id').get((req, res, next) => {
-    const { id } = req.params
-    mysql.getConnection((error, db) => {
-        const sql = `
-            select 
-                BIN_TO_UUID(id) as id,
-                business_name,
-                contact_first_name,
-                contact_last_name,
-                email 
-            from 
-                clients
-            where
-                BIN_TO_UUID(id) = ?`
-        
-        const data = [id]    
-        db.query(sql, data, (error, results, fields) => {
-            if (error) {
-                return next(error)
-            }
-            res.json(results)
-        });
-        db.release();
-    })
+router.route('/:id').get(async (req, res, next) => {
+    const id = req.params.id as unknown
+    const client = await getClientById(id as number)
+    res.json(client)
 })
 
-router.route('/create').post((req, res, next) => {
+router.route('/create').post(async (req, res, next) => {
     
     const {businessName, contactFirstName, contactLastName, email} = req.body
 
-    mysql.getConnection((error, db) => {
-        const sql = `
-        insert into 
-            clients(
-                id, 
-                business_name, 
-                contact_first_name, 
-                contact_last_name,
-                email
-            )
-        values (
-            UUID_TO_BIN(UUID()), ?, ?, ?, ?
-            );`
+    const client = {
+        businessName,
+        contactFirstName,
+        contactLastName,
+        email
+    }
 
-        const data = [businessName, contactFirstName, contactLastName, email]
-        db.query(sql, data, (error, results, fields) => {
-            if (error) {
-                res.json({error: error.code})
-                return next(error)
-            }
-
-            if (results.affectedRows == 0) {
-                return res.json({text: 'client not created'})
-            }
-            db.query( `select BIN_TO_UUID(id) as id from clients where business_name = ?`, [businessName], (error, results, fields) => {
-                if (error) {
-                    return next(error)
-                }
-                res.json(results)
-            })
-
-        });      
-        db.release();
-    })
-})
-
-router.route('/:id').delete((req, res, next) => {
+    const clientRecord = await createClient(client)
+    res.json(clientRecord)
     
-    const {id} = req.params
-
-    mysql.getConnection((error, db) => {
-        const sql = `
-            delete from clients 
-            where id = UUID_TO_BIN(?);`
-
-        const data = [id]
-
-        db.query(sql, data, (error, results, fields) => {
-            if (error) {
-                return next(error)
-            }
-            if (results.affectedRows == 0){
-                return res.json({text: 'client id not found'})
-            }
-            res.json({text: 'delete successful'})
-        });
-        db.release();
-    })
 })
 
-router.route('/:id/update').post((req,res,next) => {
+router.route('/:id').delete(async (req, res, next) => {
+    const id = req.params.id as unknown
+    await deleteClient(id as number)
+    res.status(200).send()
+})
+
+router.route('/:id/update').post(async (req,res,next) => {
     const { id } = req.params
     const {businessName, contactFirstName, contactLastName, email} = req.body
 
-    mysql.getConnection((error, db) => {
-        const sql = `
-            update clients
-            set business_name = ?, 
-                contact_first_name = ?, 
-                contact_last_name = ?,
-                email = ?
-                where id = UUID_TO_BIN(?);`
+    const client = {
+        id,
+        businessName,
+        contactFirstName,
+        contactLastName,
+        email
+    }
 
-        const data = [businessName, contactFirstName, contactLastName, email, id]
-        
-        db.query(sql, data, (error, results, fields) => {
-            if (error) {
-                res.json({error: error.code})
-                return next(error)
-            }
-
-            if (results.affectedRows == 0) {
-                return res.json({text: 'client id not found'})
-            }
-            res.json({text: 'update successful'})
-        })    
-        db.release();
-    })
+    const updatedClient = await updateClient(client)
+    res.json(updatedClient)
 })
 
 export default router
