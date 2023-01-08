@@ -42,9 +42,21 @@ describe('api v1', () => {
         test('should add 1 to the site visit count', async () => {
             await supertest(server)
                 .post('/v1/analytics/site-visits')
-                .expect(204)
+                .expect(200)
                 .then((res) => {
                     expect(res.body.siteVisits).toEqual(1)
+                })
+            await supertest(server)
+                .post('/v1/analytics/site-visits')
+                .expect(200)
+                .then((res) => {
+                    expect(res.body.siteVisits).toEqual(2)
+                })
+            await supertest(server)
+                .post('/v1/analytics/site-visits')
+                .expect(200)
+                .then((res) => {
+                    expect(res.body.siteVisits).toEqual(3)
                 })
         })
     })
