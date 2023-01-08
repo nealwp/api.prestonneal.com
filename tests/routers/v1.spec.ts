@@ -38,4 +38,14 @@ describe('api v1', () => {
                 })
         })
     })
+    describe('POST /v1/analytics/site-visits', () => {
+        test('should add 1 to the site visit count', async () => {
+            await supertest(server)
+                .post('/v1/analytics/site-visits')
+                .expect(204)
+                .then((res) => {
+                    expect(res.body.siteVisits).toEqual(1)
+                })
+        })
+    })
 }) 

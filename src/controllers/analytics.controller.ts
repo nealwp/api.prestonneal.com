@@ -1,8 +1,10 @@
-let siteVisits = 0
+import * as db from "../db"
 
-const site = {
-    getVisitCount: async () => siteVisits,
-    logVisit: async () => siteVisits += 1
+const analytics = {
+    site: {
+        getVisitCount: async () => db.getVisitCount(),
+        logVisit: async () => db.logVisit()
+    }
 }
 
-export { site }
+export { analytics }

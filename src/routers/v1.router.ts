@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { site } from "../controllers/analytics.controller";
+import { analytics} from "../controllers/analytics.controller";
 
 const router = Router()
 
@@ -12,7 +12,7 @@ router.get('/health', (req, res, next) => {
 })
 
 router.get('/analytics/site-visits', async (req, res, next) => {
-    const visits = await site.getVisitCount()
+    const visits = await analytics.site.getVisitCount()
     const data = {
         siteVisits: visits
     }
