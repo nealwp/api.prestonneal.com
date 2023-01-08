@@ -8,7 +8,7 @@
     "test:watch": "jest --watch",
     "dev": "nodemon src/main.ts",
     "build": "tsc --project tsconfig.build.json",
-    "docker:build": "docker build --tag nealwp/api.prestonneal.com:latest ."
+    "docker:build": "docker build --tag 627143802709.dkr.ecr.us-west-2.amazonaws.com/api.prestonneal.com:latest ."
   },
   "repository": {
     "type": "git",
