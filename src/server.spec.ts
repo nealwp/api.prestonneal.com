@@ -1,6 +1,6 @@
 import { Express } from 'express-serve-static-core'
-import { createServer } from '../src/server'
-import { nullMiddleware } from '../src/v1/middleware';
+import { createServer } from './server'
+import { nullMiddleware } from './v1/middleware';
 import supertest from 'supertest';
 
 
