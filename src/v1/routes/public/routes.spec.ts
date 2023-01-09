@@ -2,6 +2,8 @@ import { Express } from 'express-serve-static-core'
 import { createServer } from '../../../server'
 import { nullMiddleware } from '../../middleware';
 import supertest from 'supertest';
+import { Router } from 'express';
+import v1 from './routes';
 
 jest.mock('../../../../package.json', () => {
     return {
@@ -12,7 +14,9 @@ jest.mock('../../../../package.json', () => {
 let server: Express;
 
 beforeAll(() => {
-    server = createServer(nullMiddleware)
+    const router = Router()
+    router.use('/v1', v1)
+    server = createServer(nullMiddleware, router)
 })
 
 describe('api v1', () => {

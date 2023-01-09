@@ -2,17 +2,17 @@ import { Router } from "express";
 import { analytics} from "../../controllers/analytics.controller";
 import { version } from '../../../../package.json'
 
-const router = Router()
+const v1 = Router()
 
-router.get('/', (req, res, next) => {
+v1.get('/', (req, res, next) => {
     res.json({ apiVersion: version })
 })
 
-router.get('/health', (req, res, next) => {
+v1.get('/health', (req, res, next) => {
     res.status(200).send()
 })
 
-router.get('/analytics/site-visits', async (req, res, next) => {
+v1.get('/analytics/site-visits', async (req, res, next) => {
     const visits = await analytics.site.getVisitCount()
     const data = {
         siteVisits: visits
@@ -20,7 +20,7 @@ router.get('/analytics/site-visits', async (req, res, next) => {
     res.status(200).json(data)
 })
 
-router.post('/analytics/site-visits', async (req, res, next) => {
+v1.post('/analytics/site-visits', async (req, res, next) => {
     await analytics.site.logVisit()
     const visits = await analytics.site.getVisitCount()
     const data = {
@@ -29,4 +29,4 @@ router.post('/analytics/site-visits', async (req, res, next) => {
     res.status(200).json(data)
 })
 
-export default router
+export default v1

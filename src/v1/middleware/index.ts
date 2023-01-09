@@ -9,6 +9,7 @@ const middleware = [
 ]
 
 const nullMiddleware: any[] = [
+    bodyParserMiddleware,
     (req: any, res: any, next: any) => next()
 ]
 

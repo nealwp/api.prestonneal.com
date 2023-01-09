@@ -3,17 +3,18 @@ import { getHours, getHoursByProjectId, saveTimeEntry } from '../../controllers/
 const time = Router()
 
 time.get('/', async (req, res, next) => {
-    const projectId = req.query?.projectId as unknown
-    if (!projectId){
-        const hours = await getHours()
-        return res.json(hours)
-    }
+    const hours = await getHours()
+    return res.json(hours)   
+})
+
+time.get('/:projectId', async (req, res, next) => {
+    const projectId = req.params.projectId as unknown
     const projectHours = await getHoursByProjectId(projectId as number)
     res.json(projectHours)
 })
 
 time.post('/:projectId', async (req, res, next) => {
-    const { projectId } = req.params
+    const projectId = req.params.projectId
     const { startDatetime, endDatetime, description } = req.body
     
     const timeEntry = {
@@ -23,8 +24,8 @@ time.post('/:projectId', async (req, res, next) => {
         description
     }
     
-    await saveTimeEntry(timeEntry)
-    res.status(200).send()
+    const savedEntry = await saveTimeEntry(timeEntry)
+    res.json(savedEntry)
 })
 
 export default time

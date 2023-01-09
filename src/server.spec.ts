@@ -1,4 +1,5 @@
 import { Express } from 'express-serve-static-core'
+import { Router } from 'express';
 import { createServer } from './server'
 import { nullMiddleware } from './v1/middleware';
 import supertest from 'supertest';
@@ -11,9 +12,10 @@ describe('default test', () => {
 });
 
 let server: Express;
+const nullRouter = Router()
 
 beforeAll(() => {
-    server = createServer(nullMiddleware)
+    server = createServer(nullMiddleware, nullRouter)
 })
 
 describe('api root', () => {
