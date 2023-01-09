@@ -15,8 +15,8 @@ clients.get('/:id', async (req, res, next) => {
 })
 
 clients.post('/', async (req, res, next) => {
-    
-    const {businessName, contactFirstName, contactLastName, email} = req.body
+
+    const { businessName, contactFirstName, contactLastName, email } = req.body
 
     const client = {
         businessName,
@@ -27,7 +27,7 @@ clients.post('/', async (req, res, next) => {
 
     const clientRecord = await createClient(client)
     res.json(clientRecord)
-    
+
 })
 
 clients.delete('/:id', async (req, res, next) => {
@@ -36,9 +36,9 @@ clients.delete('/:id', async (req, res, next) => {
     res.status(200).send()
 })
 
-clients.post('/:id', async (req,res,next) => {
+clients.post('/:id', async (req, res, next) => {
     const { id } = req.params
-    const {businessName, contactFirstName, contactLastName, email} = req.body
+    const { businessName, contactFirstName, contactLastName, email } = req.body
 
     const client = {
         id,

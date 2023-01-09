@@ -28,10 +28,10 @@ projects.post('/:id', async (req, res, next) => {
     }
     const updatedProject = await updateProject(project)
     res.json(updatedProject)
-    
+
 })
 
-projects.get('/:id', async (req, res, next) =>{
+projects.get('/:id', async (req, res, next) => {
     const id = req.params.id as unknown
     const project = await getProjectById(id as number)
     res.json(project)
@@ -40,7 +40,7 @@ projects.get('/:id', async (req, res, next) =>{
 projects.delete('/:id', async (req, res, next) => {
     const id = req.params.id as unknown
     const deletedProject = await deleteProject(id as number)
-    res.json(deletedProject)    
+    res.json(deletedProject)
 })
 
 export default projects
