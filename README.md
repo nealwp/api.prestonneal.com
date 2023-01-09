@@ -13,7 +13,7 @@ Featuring:
 ## Project Structure
 ```text
 src
-├── v1                                      $${\color{green}# api version 1 goes here}$$
+├── v1                                      # api version 1 goes here
 │   ├── config
 │   │   └── db.config.ts
 │   ├── controllers
