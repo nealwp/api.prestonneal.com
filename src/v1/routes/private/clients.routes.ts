@@ -37,7 +37,7 @@ clients.delete('/:id', async (req, res, next) => {
 })
 
 clients.post('/:id', async (req, res, next) => {
-    const { id } = req.params
+    const id = req.params.id 
     const { businessName, contactFirstName, contactLastName, email } = req.body
 
     const client = {
