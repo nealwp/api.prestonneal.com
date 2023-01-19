@@ -18,4 +18,4 @@ privateApi.use('/clients', clients)
 privateApi.use('/project', projects)
 privateApi.use('/time', time)
 
-export { privateApi }
+export { privateApi, validateToken }
