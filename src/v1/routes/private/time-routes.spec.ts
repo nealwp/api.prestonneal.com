@@ -33,10 +33,10 @@ describe('time api v1', () => {
                 })
         })
     })
-    describe('GET /v1/time?projectId=<projectId>', () => {
+    describe('GET /v1/time/:projectId', () => {
         test('should return 200 and time entries for project', async () => {
             await supertest(server)
-                .get(`/time?projectId=0`)
+                .get(`/time/0`)
                 .set('Authorization', 'DUMMY_TOKEN')
                 .expect(200)
                 .then((res) => {
